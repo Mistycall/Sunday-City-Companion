@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 class CompanionViewModel(private val dao: CompanionDao) : ViewModel() {
     var sandboxEnabled by mutableStateOf(true)
         private set
-    fun setSandboxEnabled(enabled: Boolean) { sandboxEnabled = enabled }
+    fun updateSandboxEnabled(enabled: Boolean) { sandboxEnabled = enabled }
     val vehicles = dao.observeVehicles().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
     val goals = dao.observeGoals().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
     val rooms = dao.observeRooms().stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
