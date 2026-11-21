@@ -272,9 +272,7 @@ fun WalletScreen(vm: CompanionViewModel, modifier: Modifier = Modifier) {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) { Text("Risorse illimitate", fontWeight = FontWeight.SemiBold); Text("Simulazione indipendente dal gioco.", style = MaterialTheme.typography.bodySmall) }
-            Switch(checked = infinite, onCheckedChange = { vm.setSandboxEnabled(it) })
-        }
-        Text("Il catalogo della casa è dimostrativo: nessun acquisto reale.", style = MaterialTheme.typography.bodySmall)
+         Switch(checked = infinite, onCheckedChange = { vm.updateSandboxEnabled(it) })  ("Il catalogo della casa è dimostrativo: nessun acquisto reale.", style = MaterialTheme.typography.bodySmall)
     }
 }
 
