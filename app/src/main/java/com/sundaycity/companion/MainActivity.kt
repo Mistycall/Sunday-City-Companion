@@ -257,22 +257,40 @@ fun GoalsScreen(vm: CompanionViewModel, modifier: Modifier = Modifier) {
 @Composable
 fun WalletScreen(vm: CompanionViewModel, modifier: Modifier = Modifier) {
     val infinite = vm.sandboxEnabled
-    Column(modifier.fillMaxSize().padding(20.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+    Column(
+        modifier.fillMaxSize().padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
         Text("Sandbox Wallet", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Text("Valute dimostrative utilizzabili solo nel companion: non sono trasferibili a Sunday City.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(
+            "Valute dimostrative utilizzabili solo nel companion: non sono trasferibili a Sunday City.",
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
         Card(shape = RoundedCornerShape(22.dp), colors = CardDefaults.cardColors(containerColor = Ink)) {
             Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) { Text("PORTAFOGLIO LIBERO", color = Color.White, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)); Icon(Icons.Default.AllInclusive, null, tint = Gold) }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("PORTAFOGLIO LIBERO", color = Color.White, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                    Icon(Icons.Default.AllInclusive, null, tint = Gold)
+                }
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     WalletBalance("🪙", "Soldi", if (infinite) "∞" else "0", Modifier.weight(1f))
                     WalletBalance("💎", "Diamanti", if (infinite) "∞" else "0", Modifier.weight(1f))
                 }
-                Text(if (infinite) "MODALITÀ SANDBOX ATTIVA" else "MODALITÀ SANDBOX DISATTIVA", color = Gold, style = MaterialTheme.typography.labelLarge)
+                Text(
+                    if (infinite) "MODALITÀ SANDBOX ATTIVA" else "MODALITÀ SANDBOX DISATTIVA",
+                    color = Gold,
+                    style = MaterialTheme.typography.labelLarge
+                )
             }
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) { Text("Risorse illimitate", fontWeight = FontWeight.SemiBold); Text("Simulazione indipendente dal gioco.", style = MaterialTheme.typography.bodySmall) }
-         Switch(checked = infinite, onCheckedChange = { vm.updateSandboxEnabled(it) })  ("Il catalogo della casa è dimostrativo: nessun acquisto reale.", style = MaterialTheme.typography.bodySmall)
+            Column(Modifier.weight(1f)) {
+                Text("Risorse illimitate", fontWeight = FontWeight.SemiBold)
+                Text("Simulazione indipendente dal gioco.", style = MaterialTheme.typography.bodySmall)
+            }
+            Switch(checked = infinite, onCheckedChange = { vm.updateSandboxEnabled(it) })
+        }
+        Text("Il catalogo della casa è dimostrativo: nessun acquisto reale.", style = MaterialTheme.typography.bodySmall)
     }
 }
 
