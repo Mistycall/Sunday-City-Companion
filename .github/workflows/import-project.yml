@@ -1,0 +1,35 @@
+
+name: Import Android project
+
+on:
+  push:
+    paths:
+      - 'Sunday-City-Companion-main.zip'
+      - '.github/workflows/import-project.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract project
+        run: |
+          unzip -o Sunday-City-Companion-main.zip -d /tmp/project
+          ROOT=$(find /tmp/project -mindepth 1 -maxdepth 3 -type d -name app -printf '%h\n' | head -n 1)
+          test -n "$ROOT"
+          cp -a "$ROOT"/. .
+
+      - name: Save project structure
+        run: |
+          rm -f Sunday-City-Companion-main.zip
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git commit -m "Import Android project" || exit 0
+          git push
+          
